@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
+.git
+.gitignore 
+
+1,100,000 venta
+160,000 compra 
+26,000 gastos notariales
+20,000 mantenimiento
+10 años para vender

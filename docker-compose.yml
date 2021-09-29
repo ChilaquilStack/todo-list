@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+    
+    client:
+        container_name: client
+        restart: always
+        build: 
+            context: ./todo-list-client
+        ports:
+            - "80:3000"
+        networks: 
+            - todo-list-network
+        volumes: 
+            - ./todo-list-client:/app:ro
+            - /app/node_modules
+            
+    server:
+        container_name: server
+        restart: always
+        depends_on:
+            - db
+        build: 
+            context: ./todo-list-server
+        ports:
+            - 3000:3000
+        networks: 
+            - todo-list-network
+        volumes:
+            - ./todo-list-server:/app:ro
+            - /app/node_modules
+    db:
+        container_name: db
+        image: mongo
+        restart: always
+        ports:
+            - 27017:27017
+        networks:
+            - todo-list-network
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: password
+            MONGO_INITDB_DATABASE: db
+        volumes:
+            - db:/data/db
+
+volumes:
+    db:
+
+networks:
+    todo-list-network:
+        driver: bridge
