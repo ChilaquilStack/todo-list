@@ -5,14 +5,14 @@ services:
     client:
         container_name: client
         restart: always
-        build: 
+        build:
             context: ./todo-list-client
         ports:
             - "80:3000"
         networks: 
             - todo-list-network
-        volumes: 
-            - ./todo-list-client:/app:ro
+        volumes:
+            - ./todo-list-client:/app
             - /app/node_modules
             
     server:
@@ -27,7 +27,7 @@ services:
         networks: 
             - todo-list-network
         volumes:
-            - ./todo-list-server:/app:ro
+            - ./todo-list-server:/app
             - /app/node_modules
     db:
         container_name: db

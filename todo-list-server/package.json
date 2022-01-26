@@ -12,9 +12,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.6",
     "nodemon": "^2.0.9",
-    "redis": "^3.1.2"
+    "redis": "^3.1.2",
+    "socket.io": "^4.2.0"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "nodemon app.js",
     "graphql": "nodemon grapqhl/server.js"

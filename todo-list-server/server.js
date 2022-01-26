@@ -2,7 +2,8 @@ require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const auth = require('./middleware/Auth');
-
+const http = require('http');
+const { Server: Serv } = require('socket.io');
 class Server {
 
     constructor(){
@@ -19,7 +20,11 @@ class Server {
         this.routes();
         
         this.port = process.env.PORT || 3000;
-        
+
+        this.server = http.createServer(this.app);
+
+        this.io = new Serv(this.server);
+
     }
 
     middlewares() {
@@ -35,7 +40,7 @@ class Server {
     }
 
     listen() {
-        this.app.listen(
+        this.server.listen(
             this.port, 
             () => console.log(`Server is running on port ${this.port}`)
         );
